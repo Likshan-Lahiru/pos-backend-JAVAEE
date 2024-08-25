@@ -42,7 +42,7 @@ public class Customer extends HttpServlet {
                 writer.write("Customer saved successfully");
                 response.setStatus(HttpServletResponse.SC_CREATED);
             } else {
-                writer.write("Customer not saved");
+                writer.write("Customer save failed");
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
         } catch (JsonException | SQLException | ClassNotFoundException e) {
