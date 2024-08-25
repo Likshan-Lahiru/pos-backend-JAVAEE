@@ -19,6 +19,11 @@
         <param-name>DbPassword</param-name>
         <param-value>Ijse@1234</param-value>
     </context-param>
+    <context-param>
+        <param-name>origin</param-name>
+        <param-value>http://localhost:63342</param-value>
+    </context-param>
+
     <resource-ref>
         <description>DB Connection</description>
         <res-ref-name>jdbc/eshanPosSystem</res-ref-name>

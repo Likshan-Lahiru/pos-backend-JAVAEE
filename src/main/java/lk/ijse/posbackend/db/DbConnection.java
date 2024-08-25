@@ -1,11 +1,14 @@
 package lk.ijse.posbackend.db;
 
 
+import lombok.Getter;
+
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+@Getter
 public class DbConnection {
 
     private static DbConnection dbConnection;
@@ -28,7 +31,4 @@ public class DbConnection {
         return dbConnection == null ? dbConnection= new DbConnection() : dbConnection;
     }
 
-    public Connection getConnection() {
-        return connection;
-    }
 }

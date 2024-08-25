@@ -23,7 +23,7 @@
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.eclipse/yasson -->
+
         <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>yasson</artifactId>
@@ -42,14 +42,14 @@
             <version>8.0.32</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.5.7</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
