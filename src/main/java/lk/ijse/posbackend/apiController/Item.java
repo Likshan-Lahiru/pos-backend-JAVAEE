@@ -102,4 +102,35 @@ public class Item extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("calling Item delete method");
+        try (var writer = resp.getWriter()){
+
+
+
+            String id = req.getParameter("id");
+            System.out.println(id);
+            boolean isDelete = itemBO.deleteItem(id);
+
+
+            if (isDelete) {
+                writer.write("Item successfully deleted");
+
+                resp.setStatus(HttpServletResponse.SC_CREATED);
+            } else {
+                writer.write("Item Delete failed");
+
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            }
+        } catch (JsonException | SQLException | ClassNotFoundException e) {
+
+            throw new RuntimeException(e);
+        }
+    }
 }
+
+
+
+

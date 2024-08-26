@@ -104,6 +104,30 @@ public class Customer extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        try (var writer = resp.getWriter()){
+
+
+
+            String id = req.getParameter("id");
+            boolean isDelete = customerBO.deleteCustomer(id);
+
+            if (isDelete) {
+                writer.write("Customer deleted successfully");
+
+                resp.setStatus(HttpServletResponse.SC_CREATED);
+            } else {
+                writer.write("Customer deletion failed");
+
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            }
+        } catch (JsonException | SQLException | ClassNotFoundException e) {
+
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }
