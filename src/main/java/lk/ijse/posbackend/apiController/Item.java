@@ -57,6 +57,7 @@ public class Item extends HttpServlet {
 
         String all = request.getParameter("all");
         String nextid = request.getParameter("nextid");
+        String id = request.getParameter("id");
 
         if (all != null) {
             try (var writer = response.getWriter()) {
@@ -73,9 +74,18 @@ public class Item extends HttpServlet {
 
                 throw new RuntimeException(e);
             }
+        }else if (id != null) {
+            try (var writer = response.getWriter()) {
+                writer.write(jsonb.toJson(itemBO.search(id)));
+            } catch (JsonException | SQLException | ClassNotFoundException e) {
+
+                throw new RuntimeException(e);
+            }
         }
+
     }
 
+    @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("calling Item put method");
         if (!request.getContentType().toLowerCase().startsWith("application/json") || request.getContentType() == null) {

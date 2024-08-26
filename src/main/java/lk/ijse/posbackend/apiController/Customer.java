@@ -56,7 +56,7 @@ public class Customer extends HttpServlet {
 
         String all = request.getParameter("all");
         String nextid = request.getParameter("nextid");
-
+        String id = request.getParameter("id");
 
 
         if (all != null) {
@@ -69,6 +69,14 @@ public class Customer extends HttpServlet {
         }else if (nextid != null) {
             try (var writer = response.getWriter()) {
                 writer.write(jsonb.toJson(customerBO.generateCustomerId()));
+            } catch (JsonException | SQLException | ClassNotFoundException e) {
+
+                throw new RuntimeException(e);
+            }
+        }else if (id != null) {
+            System.out.println(id);
+            try (var writer = response.getWriter()) {
+                writer.write(jsonb.toJson(customerBO.search(id)));
             } catch (JsonException | SQLException | ClassNotFoundException e) {
 
                 throw new RuntimeException(e);

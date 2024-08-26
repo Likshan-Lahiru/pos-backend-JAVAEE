@@ -54,5 +54,12 @@ public class ItemBOImpl implements ItemBO {
         return itemDAO.generateID();
     }
 
+    @Override
+    public ItemDto search(String newItemCode) throws SQLException, ClassNotFoundException {
+        System.out.println("calling bo search bo method ");
+        Item item = itemDAO.search(newItemCode);
+        return new ItemDto(item.getId(), item.getName(), item.getUnitPrice(), item.getQtyOnHand());
+    }
+
 
 }

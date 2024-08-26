@@ -2,6 +2,7 @@ package lk.ijse.posbackend.dao.custom.impl;
 
 import lk.ijse.posbackend.dao.SQLUtil;
 import lk.ijse.posbackend.dao.custom.ItemDAO;
+import lk.ijse.posbackend.entity.Customer;
 import lk.ijse.posbackend.entity.Item;
 
 import java.sql.ResultSet;
@@ -53,4 +54,16 @@ public class ItemDAOImpl implements ItemDAO {
             return "I00-001";
         }
     }
+
+    @Override
+    public Item search(String id) throws SQLException, ClassNotFoundException {
+        System.out.println("calling DAO Item search DAO method");
+        ResultSet rst = SQLUtil.execute("SELECT * FROM item WHERE id=?",id + "");
+        rst.next();
+        Item item = new Item(id + "", rst.getString("name"), rst.getDouble("unit_price"), rst.getInt("qty"));
+
+        return item;
+    }
+
+
 }

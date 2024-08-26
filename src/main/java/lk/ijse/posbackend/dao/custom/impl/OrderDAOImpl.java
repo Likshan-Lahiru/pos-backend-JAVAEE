@@ -31,4 +31,9 @@ public class OrderDAOImpl implements OrderDAO {
     public String generateID() throws SQLException, ClassNotFoundException {
         return "";
     }
+
+    @Override
+    public Order search(String newValue) throws SQLException, ClassNotFoundException {
+        return null;
+    }
 }

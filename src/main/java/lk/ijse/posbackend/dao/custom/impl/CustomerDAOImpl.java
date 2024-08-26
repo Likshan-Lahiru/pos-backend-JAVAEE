@@ -54,4 +54,15 @@ public class CustomerDAOImpl implements CustomerDAO {
             return "C00-001";
         }
     }
+
+    @Override
+    public Customer search(String id) throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM customer WHERE id=?",id + "");
+        rst.next();
+        Customer entity = new Customer(id + "", rst.getString("name"), rst.getString("address"), rst.getString("contact"));
+
+        return entity;
+    }
+
+
 }

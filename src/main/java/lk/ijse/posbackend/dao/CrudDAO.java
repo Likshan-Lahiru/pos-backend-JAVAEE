@@ -1,5 +1,7 @@
 package lk.ijse.posbackend.dao;
 
+import lk.ijse.posbackend.entity.Customer;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,5 +17,6 @@ public interface CrudDAO<T> extends SuperDAO {
 
     String generateID() throws SQLException, ClassNotFoundException;
 
+    T search(String id) throws SQLException, ClassNotFoundException;
 
 }
