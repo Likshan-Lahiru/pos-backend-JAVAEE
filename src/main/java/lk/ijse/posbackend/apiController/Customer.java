@@ -36,9 +36,9 @@ public class Customer extends HttpServlet {
 
             CustomerDto customerDTO = jsonb.fromJson(request.getReader(), CustomerDto.class);
             System.out.println(customerDTO);
-            boolean isSave = customerBO.saveCustomer(customerDTO);
+            boolean result = customerBO.saveCustomer(customerDTO);
 
-            if (isSave) {
+            if (result) {
                 writer.write("Customer saved successfully");
                 response.setStatus(HttpServletResponse.SC_CREATED);
             } else {
