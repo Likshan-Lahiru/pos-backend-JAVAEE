@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Data
 public class ItemDto implements Serializable {
     private String id;
-    private String description;
+    private String name;
     private double unitPrice;
     private int qty;
 }

@@ -13,7 +13,14 @@ public class CustomerBOImpl implements CustomerBO {
     CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
     @Override
     public ArrayList<CustomerDto> getAllCustomers() throws SQLException, ClassNotFoundException {
-        return null;
+        ArrayList<Customer> allCustomers = customerDAO.getAll();
+        ArrayList<CustomerDto> customerDTOS = new ArrayList<>();
+
+        for (Customer customer : allCustomers) {
+            customerDTOS.add(new CustomerDto(customer.getId(), customer.getName(), customer.getAddress(), customer.getContact()));
+        }
+
+        return customerDTOS;
     }
 
     @Override
@@ -28,11 +35,17 @@ public class CustomerBOImpl implements CustomerBO {
 
     @Override
     public boolean updateCustomer(CustomerDto dto) throws SQLException, ClassNotFoundException {
-        return false;
+
+        return customerDAO.update(new Customer(dto.getId(), dto.getName(), dto.getAddress(), dto.getContact()));
     }
 
     @Override
     public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
         return false;
+    }
+
+    @Override
+    public String generateCustomerId() throws SQLException, ClassNotFoundException {
+        return customerDAO.generateID();
     }
 }

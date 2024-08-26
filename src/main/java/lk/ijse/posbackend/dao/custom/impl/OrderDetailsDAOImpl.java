@@ -26,4 +26,9 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
         return false;
     }
+
+    @Override
+    public String generateID() throws SQLException, ClassNotFoundException {
+        return "";
+    }
 }

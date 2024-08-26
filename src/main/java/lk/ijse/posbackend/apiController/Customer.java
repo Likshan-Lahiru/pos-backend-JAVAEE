@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.posbackend.bo.BOFactory;
 import lk.ijse.posbackend.bo.custom.CustomerBO;
 import lk.ijse.posbackend.dto.CustomerDto;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -55,8 +54,55 @@ public class Customer extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("calling customer get method");
 
+        String all = request.getParameter("all");
+        String nextid = request.getParameter("nextid");
 
 
+
+        if (all != null) {
+            try (var writer = response.getWriter()) {
+                writer.write(jsonb.toJson(customerBO.getAllCustomers()));
+            } catch (JsonException | SQLException | ClassNotFoundException e) {
+
+                throw new RuntimeException(e);
+            }
+        }else if (nextid != null) {
+            try (var writer = response.getWriter()) {
+                writer.write(jsonb.toJson(customerBO.generateCustomerId()));
+            } catch (JsonException | SQLException | ClassNotFoundException e) {
+
+                throw new RuntimeException(e);
+            }
+        }
+
+
+
+
+    }
+
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("calling customer put method");
+        if (!request.getContentType().toLowerCase().startsWith("application/json") || request.getContentType() == null) {
+            response.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+        }
+        try (var writer = response.getWriter()){
+        CustomerDto customerDTO = jsonb.fromJson(request.getReader(), CustomerDto.class);
+            System.out.println(customerDTO);
+            boolean isUpdate = customerBO.updateCustomer(customerDTO);
+
+            if (isUpdate) {
+                writer.write("Customer successfully updated");
+
+                response.setStatus(HttpServletResponse.SC_CREATED);
+            } else {
+                writer.write("Customer not updated");
+
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            }
+        } catch (JsonException | SQLException | ClassNotFoundException e) {
+
+            throw new RuntimeException(e);
+        }
     }
 
 
