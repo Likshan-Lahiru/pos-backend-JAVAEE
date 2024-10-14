@@ -38,8 +38,7 @@ The application uses a logging framework to manage logs with various levels:
 
 Make sure to check the configuration file for logging settings.
 
-## **API Documentation**
-You can find the API documentation [here](./api-documentation.md). The documentation provides details on the available endpoints, their parameters, and response formats.
+sponse formats.
 
 ## **Project Setup**
 To set up this project locally:
